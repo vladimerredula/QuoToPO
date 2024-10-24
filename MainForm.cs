@@ -1,21 +1,17 @@
-using System;
-using System.Drawing;
-using System.Drawing.Imaging;
+﻿using PdfiumViewer;
 using Tesseract;
-using PdfiumViewer;
 
 namespace QuoToPO
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private PdfDocument pdfDocument;
         private int currentPage = 0;
         private int totalPages = 0;
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
-            SetPictureBoxSize();
         }
 
         private void browseBtn_Click(object sender, EventArgs e)
@@ -48,9 +44,60 @@ namespace QuoToPO
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void nextBtn_Click(object sender, EventArgs e)
         {
+            if (currentPage < totalPages - 1)
+            {
+                currentPage++;
+                LoadPdfPage(currentPage);
+                pageLbl.Text = $"Page {currentPage + 1} of {totalPages}";
+            }
+        }
 
+        private void prevBtn_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 0)
+            {
+                currentPage--;
+                LoadPdfPage(currentPage);
+                pageLbl.Text = $"Page {currentPage + 1} of {totalPages}";
+            }
+        }
+
+        private void extractBtn_Click(object sender, EventArgs e)
+        {
+            // Get the selected value
+            var selectedValue = pdfType?.SelectedItem?.ToString() ?? "Native PDF";
+            var extractedText = "";
+
+            if (selectedValue == "Native PDF")
+            {
+                for (int i = 0; i < totalPages; i++)
+                {
+                    // Extract text from each page
+                    string pageText = pdfDocument.GetPdfText(i);
+
+                    extractedText += pageText;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < totalPages; i++)
+                {
+                    // Render the current page as a bitmap
+                    var image = pdfDocument.Render(i, 600, 600, true);
+
+                    // rescale image 4x biffer for better recognition
+                    var reziedImage = RescaleImage((Bitmap)image, 4.0f);
+
+                    // Perform OCR on the rendered page
+                    string pageText = PerformOcr(reziedImage);
+
+                    extractedText += pageText;
+                }
+            }
+
+            textBox1.Text = extractedText;
         }
 
         private void LoadPdfPage(int pageNumber)
@@ -79,7 +126,7 @@ namespace QuoToPO
                     engine.SetVariable("textord_min_linesize", "1.5");  // Handle small text better
                     //engine.SetVariable("tessedit_char_whitelist", "0123456789abcdefghijklmnopqrstuvwxyz");
 
-                    using (var pixImage = BitmapToPix(processedImg)) // Convert Bitmap to Pix
+                    using (var pixImage = BitmapToPix(processedImg))
                     {
                         using (var page = engine.Process(pixImage, PageSegMode.Auto))
                         {
@@ -112,6 +159,7 @@ namespace QuoToPO
             }
         }
 
+        // Helper method to grayscale and binarize image
         public static Bitmap PreprocessImage(Bitmap originalImage, int threshold = 128)
         {
             Bitmap grayscaleImage = new Bitmap(originalImage.Width, originalImage.Height);
@@ -143,45 +191,11 @@ namespace QuoToPO
                 }
             }
 
-            // Return the binarized image for OCR
+            // Return the binarized image
             return binarizedImage;
         }
 
-        private void SetPictureBoxSize()
-        {
-            // A4 Aspect Ratio (1:1.414)
-            float aspectRatio = 1.414f;
-
-            // Set width and height for preview
-            int previewWidth = 300; // Fixed width
-            int previewHeight = (int)(previewWidth * aspectRatio);
-
-            // Set PictureBox size based on calculated width and height
-            quotationPreviewBox.Width = previewWidth;
-            quotationPreviewBox.Height = previewHeight;
-            quotationPreviewBox.SizeMode = PictureBoxSizeMode.Zoom;
-        }
-
-        private void nextBtn_Click(object sender, EventArgs e)
-        {
-            if (currentPage < totalPages - 1)
-            {
-                currentPage++;
-                LoadPdfPage(currentPage);
-                pageLbl.Text = $"Page {currentPage + 1} of {totalPages}";
-            }
-        }
-
-        private void prevBtn_Click(object sender, EventArgs e)
-        {
-            if (currentPage > 0)
-            {
-                currentPage--;
-                LoadPdfPage(currentPage);
-                pageLbl.Text = $"Page {currentPage + 1} of {totalPages}";
-            }
-        }
-
+        // Helper method to rescale image
         public Bitmap RescaleImage(Bitmap image, float scaleFactor)
         {
             int newWidth = (int)(image.Width * scaleFactor);
@@ -195,41 +209,6 @@ namespace QuoToPO
             }
 
             return resizedImage;
-        }
-
-        private void extractBtn_Click(object sender, EventArgs e)
-        {
-            // Get the selected value
-            var selectedValue = pdfType?.SelectedItem?.ToString() ?? "Native PDF";
-            var extractedText = "";
-
-            if (selectedValue == "Native PDF")
-            {
-                for (int i = 0; i < totalPages; i++)
-                {
-                    // Extract text from each page
-                    string pageText = pdfDocument.GetPdfText(i);
-
-                    extractedText += pageText;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < totalPages; i++)
-                {
-                    // Render the current page as a bitmap
-                    var image = pdfDocument.Render(i, 600, 600, true);
-
-                    var reziedImage = RescaleImage((Bitmap)image, 4.0f);
-
-                    // Perform OCR on the rendered page
-                    string pageText = PerformOcr(reziedImage);
-
-                    extractedText += pageText;
-                }
-            }
-
-            textBox1.Text = extractedText;
         }
     }
 }
