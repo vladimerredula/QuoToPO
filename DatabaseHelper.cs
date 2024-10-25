@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DotNetEnv;
+using MySql.Data.MySqlClient;
 using System.Data;
 
 namespace QuoToPO
@@ -8,9 +9,12 @@ namespace QuoToPO
         private string _connectionString;
 
         // Constructor to initialize the connection string
-        public DatabaseHelper(string server, string database, string username, string password)
+        public DatabaseHelper()
         {
-            _connectionString = $"Server={server};Database={database};Uid={username};Pwd={password};";
+            // Load the .env file
+            Env.Load();
+
+            _connectionString = Env.GetString("DB_CONNECTION_STRING");
         }
 
         // Method to establish and open a connection to the database
@@ -73,6 +77,14 @@ namespace QuoToPO
             }
 
             return dataTable;
+        }
+        private string HashPassword(string password)
+        {
+            using (var sha256 = System.Security.Cryptography.SHA256.Create())
+            {
+                byte[] hashedBytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
         }
     }
 }
