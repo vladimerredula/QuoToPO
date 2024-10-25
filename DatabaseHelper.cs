@@ -69,6 +69,7 @@ namespace QuoToPO
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
                     cmd.Parameters.AddRange(parameters);
+
                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
                     {
                         adapter.Fill(dataTable);
@@ -78,6 +79,7 @@ namespace QuoToPO
 
             return dataTable;
         }
+
         private string HashPassword(string password)
         {
             using (var sha256 = System.Security.Cryptography.SHA256.Create())
