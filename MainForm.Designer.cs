@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            browseBtn = new Button();
-            quotationPathTxt = new TextBox();
-            quoatationLbl = new Label();
-            groupBox1 = new GroupBox();
-            pageLbl = new Label();
+            btnBrowse = new Button();
+            txtQuotationPath = new TextBox();
+            lblQuotation = new Label();
+            grpPreview = new GroupBox();
+            lblPage = new Label();
             quotationPreviewBox = new PictureBox();
-            nextBtn = new Button();
-            prevBtn = new Button();
+            btnNext = new Button();
+            btnPrev = new Button();
             pdfType = new ComboBox();
-            extractBtn = new Button();
-            groupBox2 = new GroupBox();
-            textBox1 = new TextBox();
+            btnExtract = new Button();
+            grpExtractedData = new GroupBox();
+            txtExtractedData = new TextBox();
             dateTimePicker1 = new DateTimePicker();
             supplierName = new TextBox();
             label7 = new Label();
@@ -54,64 +54,64 @@
             quotationNo = new TextBox();
             label2 = new Label();
             label1 = new Label();
-            groupBox1.SuspendLayout();
+            grpPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)quotationPreviewBox).BeginInit();
-            groupBox2.SuspendLayout();
+            grpExtractedData.SuspendLayout();
             SuspendLayout();
             // 
-            // browseBtn
+            // btnBrowse
             // 
-            browseBtn.ImeMode = ImeMode.NoControl;
-            browseBtn.Location = new Point(766, 27);
-            browseBtn.Name = "browseBtn";
-            browseBtn.Size = new Size(75, 23);
-            browseBtn.TabIndex = 3;
-            browseBtn.Text = "Browse";
-            browseBtn.UseVisualStyleBackColor = true;
-            browseBtn.Click += browseBtn_Click;
+            btnBrowse.ImeMode = ImeMode.NoControl;
+            btnBrowse.Location = new Point(766, 27);
+            btnBrowse.Name = "btnBrowse";
+            btnBrowse.Size = new Size(75, 23);
+            btnBrowse.TabIndex = 3;
+            btnBrowse.Text = "Browse";
+            btnBrowse.UseVisualStyleBackColor = true;
+            btnBrowse.Click += browseBtn_Click;
             // 
-            // quotationPathTxt
+            // txtQuotationPath
             // 
-            quotationPathTxt.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            quotationPathTxt.Location = new Point(12, 27);
-            quotationPathTxt.MaximumSize = new Size(750, 23);
-            quotationPathTxt.Name = "quotationPathTxt";
-            quotationPathTxt.ReadOnly = true;
-            quotationPathTxt.Size = new Size(748, 23);
-            quotationPathTxt.TabIndex = 2;
+            txtQuotationPath.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtQuotationPath.Location = new Point(12, 27);
+            txtQuotationPath.MaximumSize = new Size(750, 23);
+            txtQuotationPath.Name = "txtQuotationPath";
+            txtQuotationPath.ReadOnly = true;
+            txtQuotationPath.Size = new Size(748, 23);
+            txtQuotationPath.TabIndex = 2;
             // 
-            // quoatationLbl
+            // lblQuotation
             // 
-            quoatationLbl.AutoSize = true;
-            quoatationLbl.ImeMode = ImeMode.NoControl;
-            quoatationLbl.Location = new Point(12, 9);
-            quoatationLbl.Name = "quoatationLbl";
-            quoatationLbl.Size = new Size(61, 15);
-            quoatationLbl.TabIndex = 1;
-            quoatationLbl.Text = "Quotation";
+            lblQuotation.AutoSize = true;
+            lblQuotation.ImeMode = ImeMode.NoControl;
+            lblQuotation.Location = new Point(12, 9);
+            lblQuotation.Name = "lblQuotation";
+            lblQuotation.Size = new Size(61, 15);
+            lblQuotation.TabIndex = 1;
+            lblQuotation.Text = "Quotation";
             // 
-            // groupBox1
+            // grpPreview
             // 
-            groupBox1.Controls.Add(pageLbl);
-            groupBox1.Controls.Add(quotationPreviewBox);
-            groupBox1.Controls.Add(nextBtn);
-            groupBox1.Controls.Add(prevBtn);
-            groupBox1.Location = new Point(12, 71);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(312, 480);
-            groupBox1.TabIndex = 4;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Preview";
+            grpPreview.Controls.Add(lblPage);
+            grpPreview.Controls.Add(quotationPreviewBox);
+            grpPreview.Controls.Add(btnNext);
+            grpPreview.Controls.Add(btnPrev);
+            grpPreview.Location = new Point(12, 71);
+            grpPreview.Name = "grpPreview";
+            grpPreview.Size = new Size(312, 480);
+            grpPreview.TabIndex = 4;
+            grpPreview.TabStop = false;
+            grpPreview.Text = "Preview";
             // 
-            // pageLbl
+            // lblPage
             // 
-            pageLbl.AutoSize = true;
-            pageLbl.ImeMode = ImeMode.NoControl;
-            pageLbl.Location = new Point(120, 454);
-            pageLbl.Name = "pageLbl";
-            pageLbl.Size = new Size(65, 15);
-            pageLbl.TabIndex = 6;
-            pageLbl.Text = "Page 0 of 0";
+            lblPage.AutoSize = true;
+            lblPage.ImeMode = ImeMode.NoControl;
+            lblPage.Location = new Point(120, 454);
+            lblPage.Name = "lblPage";
+            lblPage.Size = new Size(65, 15);
+            lblPage.TabIndex = 6;
+            lblPage.Text = "Page 0 of 0";
             // 
             // quotationPreviewBox
             // 
@@ -123,66 +123,68 @@
             quotationPreviewBox.TabIndex = 3;
             quotationPreviewBox.TabStop = false;
             // 
-            // nextBtn
+            // btnNext
             // 
-            nextBtn.ImeMode = ImeMode.NoControl;
-            nextBtn.Location = new Point(246, 450);
-            nextBtn.Name = "nextBtn";
-            nextBtn.Size = new Size(60, 23);
-            nextBtn.TabIndex = 7;
-            nextBtn.Text = "Next";
-            nextBtn.UseVisualStyleBackColor = true;
-            nextBtn.Click += nextBtn_Click;
+            btnNext.ImeMode = ImeMode.NoControl;
+            btnNext.Location = new Point(246, 450);
+            btnNext.Name = "btnNext";
+            btnNext.Size = new Size(60, 23);
+            btnNext.TabIndex = 7;
+            btnNext.Text = "Next";
+            btnNext.UseVisualStyleBackColor = true;
+            btnNext.Click += nextBtn_Click;
             // 
-            // prevBtn
+            // btnPrev
             // 
-            prevBtn.ImeMode = ImeMode.NoControl;
-            prevBtn.Location = new Point(6, 450);
-            prevBtn.Name = "prevBtn";
-            prevBtn.Size = new Size(60, 23);
-            prevBtn.TabIndex = 5;
-            prevBtn.Text = "Previous";
-            prevBtn.UseVisualStyleBackColor = true;
-            prevBtn.Click += prevBtn_Click;
+            btnPrev.ImeMode = ImeMode.NoControl;
+            btnPrev.Location = new Point(6, 450);
+            btnPrev.Name = "btnPrev";
+            btnPrev.Size = new Size(60, 23);
+            btnPrev.TabIndex = 5;
+            btnPrev.Text = "Previous";
+            btnPrev.UseVisualStyleBackColor = true;
+            btnPrev.Click += prevBtn_Click;
             // 
             // pdfType
             // 
+            pdfType.DisplayMember = "(none)";
             pdfType.DropDownStyle = ComboBoxStyle.DropDownList;
             pdfType.FormattingEnabled = true;
             pdfType.Items.AddRange(new object[] { "Native PDF", "Scanned PDF" });
             pdfType.Location = new Point(371, 257);
             pdfType.Name = "pdfType";
             pdfType.Size = new Size(121, 23);
+            pdfType.Sorted = true;
             pdfType.TabIndex = 8;
             // 
-            // extractBtn
+            // btnExtract
             // 
-            extractBtn.ImeMode = ImeMode.NoControl;
-            extractBtn.Location = new Point(396, 286);
-            extractBtn.Name = "extractBtn";
-            extractBtn.Size = new Size(75, 23);
-            extractBtn.TabIndex = 9;
-            extractBtn.Text = "Extract";
-            extractBtn.UseVisualStyleBackColor = true;
-            extractBtn.Click += extractBtn_Click;
+            btnExtract.ImeMode = ImeMode.NoControl;
+            btnExtract.Location = new Point(396, 286);
+            btnExtract.Name = "btnExtract";
+            btnExtract.Size = new Size(75, 23);
+            btnExtract.TabIndex = 9;
+            btnExtract.Text = "Extract";
+            btnExtract.UseVisualStyleBackColor = true;
+            btnExtract.Click += extractBtn_Click;
             // 
-            // groupBox2
+            // grpExtractedData
             // 
-            groupBox2.Controls.Add(textBox1);
-            groupBox2.Location = new Point(525, 71);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(493, 480);
-            groupBox2.TabIndex = 10;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Extracted Data";
+            grpExtractedData.Controls.Add(txtExtractedData);
+            grpExtractedData.Location = new Point(525, 71);
+            grpExtractedData.Name = "grpExtractedData";
+            grpExtractedData.Size = new Size(493, 480);
+            grpExtractedData.TabIndex = 10;
+            grpExtractedData.TabStop = false;
+            grpExtractedData.Text = "Extracted Data";
             // 
-            // textBox1
+            // txtExtractedData
             // 
-            textBox1.Location = new Point(6, 22);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(481, 451);
-            textBox1.TabIndex = 11;
+            txtExtractedData.Location = new Point(6, 22);
+            txtExtractedData.Multiline = true;
+            txtExtractedData.Name = "txtExtractedData";
+            txtExtractedData.Size = new Size(481, 451);
+            txtExtractedData.TabIndex = 11;
             // 
             // dateTimePicker1
             // 
@@ -322,39 +324,39 @@
             Controls.Add(quotationNo);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(groupBox2);
-            Controls.Add(browseBtn);
-            Controls.Add(quotationPathTxt);
-            Controls.Add(quoatationLbl);
-            Controls.Add(groupBox1);
+            Controls.Add(grpExtractedData);
+            Controls.Add(btnBrowse);
+            Controls.Add(txtQuotationPath);
+            Controls.Add(lblQuotation);
+            Controls.Add(grpPreview);
             Controls.Add(pdfType);
-            Controls.Add(extractBtn);
+            Controls.Add(btnExtract);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "QuoToPO";
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            grpPreview.ResumeLayout(false);
+            grpPreview.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)quotationPreviewBox).EndInit();
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
+            grpExtractedData.ResumeLayout(false);
+            grpExtractedData.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Button browseBtn;
-        private TextBox quotationPathTxt;
-        private Label quoatationLbl;
-        private GroupBox groupBox1;
-        private Label pageLbl;
+        private Button btnBrowse;
+        private TextBox txtQuotationPath;
+        private Label lblQuotation;
+        private GroupBox grpPreview;
+        private Label lblPage;
         private PictureBox quotationPreviewBox;
-        private Button nextBtn;
-        private Button prevBtn;
+        private Button btnNext;
+        private Button btnPrev;
         private ComboBox pdfType;
-        private Button extractBtn;
-        private GroupBox groupBox2;
-        private TextBox textBox1;
+        private Button btnExtract;
+        private GroupBox grpExtractedData;
+        private TextBox txtExtractedData;
         private DateTimePicker dateTimePicker1;
         private TextBox supplierName;
         private Label label7;
