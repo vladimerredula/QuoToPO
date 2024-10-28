@@ -88,5 +88,97 @@ namespace QuoToPO
                 return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
             }
         }
+
+        #region Company functions
+
+        public List<Company> GetCompanies()
+        {
+            List<Company> companies = new List<Company>();
+            string query = "SELECT * FROM Companies";
+
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                companies.Add(new Company()
+                                {
+                                    Company_ID = reader.IsDBNull(reader.GetOrdinal("Company_ID")) ? 0 : reader.GetInt32("Company_ID"),
+                                    Company_name = reader.IsDBNull(reader.GetOrdinal("Company_name")) ? string.Empty : reader.GetString("Company_name"),
+                                    Company_name_jpn = reader.IsDBNull(reader.GetOrdinal("Company_name_jpn")) ? string.Empty : reader.GetString("Company_name_jpn"),
+                                    Company_address = reader.IsDBNull(reader.GetOrdinal("Company_address")) ? string.Empty : reader.GetString("Company_address"),
+                                    Company_address_jpn = reader.IsDBNull(reader.GetOrdinal("Company_address_jpn")) ? string.Empty : reader.GetString("Company_address_jpn"),
+                                    Postal_code = reader.IsDBNull(reader.GetOrdinal("Postal_code")) ? string.Empty : reader.GetString("Postal_code"),
+                                    Telephone = reader.IsDBNull(reader.GetOrdinal("Telephone")) ? string.Empty : reader.GetString("Telephone"),
+                                    Fax = reader.IsDBNull(reader.GetOrdinal("Fax")) ? string.Empty : reader.GetString("Fax"),
+                                    Key_words = reader.IsDBNull(reader.GetOrdinal("Key_words")) ? string.Empty : reader.GetString("Key_words")
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching companies: {ex.Message}");
+            }
+
+            return companies;
+        }
+
+        public Company GetCompany(int companyId)
+        {
+            Company company = new Company();
+
+            var query = $"SELECT * FROM Companies WHERE Company_ID = {companyId}";
+
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                company.Company_ID = reader.IsDBNull(reader.GetOrdinal("Company_ID")) ? 0 : reader.GetInt32("Company_ID");
+                                company.Company_name = reader.IsDBNull(reader.GetOrdinal("Company_name")) ? string.Empty : reader.GetString("Company_name");
+                                company.Company_name_jpn = reader.IsDBNull(reader.GetOrdinal("Company_name_jpn")) ? string.Empty : reader.GetString("Company_name_jpn");
+                                company.Company_address = reader.IsDBNull(reader.GetOrdinal("Company_address")) ? string.Empty : reader.GetString("Company_address");
+                                company.Company_address_jpn = reader.IsDBNull(reader.GetOrdinal("Company_address_jpn")) ? string.Empty : reader.GetString("Company_address_jpn");
+                                company.Postal_code = reader.IsDBNull(reader.GetOrdinal("Postal_code")) ? string.Empty : reader.GetString("Postal_code");
+                                company.Telephone = reader.IsDBNull(reader.GetOrdinal("Telephone")) ? string.Empty : reader.GetString("Telephone");
+                                company.Fax = reader.IsDBNull(reader.GetOrdinal("Fax")) ? string.Empty : reader.GetString("Fax");
+                                company.Key_words = reader.IsDBNull(reader.GetOrdinal("Key_words")) ? string.Empty : reader.GetString("Key_words");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching company: {ex.Message}");
+                //Console.WriteLine($"Error fetching company: {ex.Message}");
+            }
+
+            return company;
+        }
+
+        public List<Company> GetFFJCompanyList()
+        {
+            var companies = GetCompanies();
+
+            return companies.Where(c => c.Company_ID <= 5).ToList();
+        }
+
+        #endregion
     }
 }
