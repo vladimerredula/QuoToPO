@@ -15,15 +15,15 @@ namespace QuoToPO
                 using (var engine = new TesseractEngine(tessDataPath, "eng+jpn", EngineMode.Default))
                 {
                     // rescale image 4x biffer for better recognition
-                    var reziedImage = RescaleImage(image, 4.0f);
+                    var processedImg = RescaleImage(image, 7.0f);
 
                     // process to grayscale and binarize image
-                    //var processedImg = PreprocessImage(reziedImage);
+                    //processedImg = PreprocessImage(processedImg);
 
-                    engine.SetVariable("textord_min_linesize", "1.5");  // Handle small text better
+                    engine.SetVariable("textord_min_linesize", "0.8");  // Handle small text better
                     //engine.SetVariable("tessedit_char_whitelist", "0123456789abcdefghijklmnopqrstuvwxyz");
 
-                    using (var pixImage = BitmapToPix(reziedImage))
+                    using (var pixImage = BitmapToPix(processedImg))
                     {
                         using (var page = engine.Process(pixImage, PageSegMode.Auto))
                         {
