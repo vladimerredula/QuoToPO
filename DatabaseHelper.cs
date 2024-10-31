@@ -179,6 +179,13 @@ namespace QuoToPO
             return companies.Where(c => c.Company_ID <= 5).ToList();
         }
 
+        public List<Company> GetSupplierCompanyList()
+        {
+            var companies = GetCompanies();
+
+            return companies.Where(c => c.Company_ID > 5).ToList();
+        }
+
         #endregion
     }
 }
