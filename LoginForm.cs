@@ -2,7 +2,7 @@
 {
     public partial class LoginForm : Form
     {
-        private DatabaseHelper _db;
+        private readonly DatabaseHelper _db;
 
         public LoginForm()
         {

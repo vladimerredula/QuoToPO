@@ -39,21 +39,24 @@
             pdfType = new ComboBox();
             btnExtract = new Button();
             grpExtractedData = new GroupBox();
-            txtExtractedData = new TextBox();
-            dateTimePicker1 = new DateTimePicker();
-            supplierName = new TextBox();
+            JpnPO = new RadioButton();
+            EngPO = new RadioButton();
+            DeliveryAddressList = new ComboBox();
+            comboBox1 = new ComboBox();
             label7 = new Label();
-            supplierAddress = new TextBox();
+            DatePicker = new DateTimePicker();
+            label1 = new Label();
+            SupplierName = new TextBox();
+            label2 = new Label();
+            quotationNo = new TextBox();
+            SupplierAddress = new TextBox();
+            PaymentTerms = new TextBox();
             label6 = new Label();
             label4 = new Label();
+            DeliveryAddress = new TextBox();
             label5 = new Label();
             label3 = new Label();
-            deliveryAddress = new TextBox();
-            deliveryTerms = new TextBox();
-            paymentTerms = new TextBox();
-            quotationNo = new TextBox();
-            label2 = new Label();
-            label1 = new Label();
+            txtExtractedData = new TextBox();
             grpPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)quotationPreviewBox).BeginInit();
             grpExtractedData.SuspendLayout();
@@ -68,7 +71,7 @@
             btnBrowse.TabIndex = 3;
             btnBrowse.Text = "Browse";
             btnBrowse.UseVisualStyleBackColor = true;
-            btnBrowse.Click += browseBtn_Click;
+            btnBrowse.Click += BrowseBtn_Click;
             // 
             // txtQuotationPath
             // 
@@ -132,7 +135,7 @@
             btnNext.TabIndex = 7;
             btnNext.Text = "Next";
             btnNext.UseVisualStyleBackColor = true;
-            btnNext.Click += nextBtn_Click;
+            btnNext.Click += NextBtn_Click;
             // 
             // btnPrev
             // 
@@ -143,14 +146,11 @@
             btnPrev.TabIndex = 5;
             btnPrev.Text = "Previous";
             btnPrev.UseVisualStyleBackColor = true;
-            btnPrev.Click += prevBtn_Click;
+            btnPrev.Click += PrevBtn_Click;
             // 
             // pdfType
             // 
-            pdfType.DisplayMember = "(none)";
             pdfType.DropDownStyle = ComboBoxStyle.DropDownList;
-            pdfType.FormattingEnabled = true;
-            pdfType.Items.AddRange(new object[] { "Native PDF", "Scanned PDF" });
             pdfType.Location = new Point(371, 257);
             pdfType.Name = "pdfType";
             pdfType.Size = new Size(121, 23);
@@ -166,62 +166,158 @@
             btnExtract.TabIndex = 9;
             btnExtract.Text = "Extract";
             btnExtract.UseVisualStyleBackColor = true;
-            btnExtract.Click += extractBtn_Click;
+            btnExtract.Click += ExtractBtn_Click;
             // 
             // grpExtractedData
             // 
-            grpExtractedData.Controls.Add(txtExtractedData);
+            grpExtractedData.Controls.Add(JpnPO);
+            grpExtractedData.Controls.Add(EngPO);
+            grpExtractedData.Controls.Add(DeliveryAddressList);
+            grpExtractedData.Controls.Add(comboBox1);
+            grpExtractedData.Controls.Add(label7);
+            grpExtractedData.Controls.Add(DatePicker);
+            grpExtractedData.Controls.Add(label1);
+            grpExtractedData.Controls.Add(SupplierName);
+            grpExtractedData.Controls.Add(label2);
+            grpExtractedData.Controls.Add(quotationNo);
+            grpExtractedData.Controls.Add(SupplierAddress);
+            grpExtractedData.Controls.Add(PaymentTerms);
+            grpExtractedData.Controls.Add(label6);
+            grpExtractedData.Controls.Add(label4);
+            grpExtractedData.Controls.Add(DeliveryAddress);
+            grpExtractedData.Controls.Add(label5);
+            grpExtractedData.Controls.Add(label3);
             grpExtractedData.Location = new Point(525, 71);
             grpExtractedData.Name = "grpExtractedData";
-            grpExtractedData.Size = new Size(493, 480);
+            grpExtractedData.Size = new Size(450, 480);
             grpExtractedData.TabIndex = 10;
             grpExtractedData.TabStop = false;
-            grpExtractedData.Text = "Extracted Data";
+            grpExtractedData.Text = "Data";
             // 
-            // txtExtractedData
+            // JpnPO
             // 
-            txtExtractedData.Location = new Point(6, 22);
-            txtExtractedData.Multiline = true;
-            txtExtractedData.Name = "txtExtractedData";
-            txtExtractedData.Size = new Size(481, 451);
-            txtExtractedData.TabIndex = 11;
+            JpnPO.AutoSize = true;
+            JpnPO.Location = new Point(87, 19);
+            JpnPO.Name = "JpnPO";
+            JpnPO.Size = new Size(64, 19);
+            JpnPO.TabIndex = 50;
+            JpnPO.Text = "日本語";
+            JpnPO.UseVisualStyleBackColor = true;
+            JpnPO.CheckedChanged += JpnPO_CheckedChanged;
             // 
-            // dateTimePicker1
+            // EngPO
             // 
-            dateTimePicker1.Location = new Point(116, 699);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
-            dateTimePicker1.TabIndex = 46;
+            EngPO.AutoSize = true;
+            EngPO.Checked = true;
+            EngPO.Location = new Point(18, 19);
+            EngPO.Name = "EngPO";
+            EngPO.Size = new Size(63, 19);
+            EngPO.TabIndex = 49;
+            EngPO.TabStop = true;
+            EngPO.Text = "English";
+            EngPO.UseVisualStyleBackColor = true;
+            EngPO.CheckedChanged += EngPO_CheckedChanged;
             // 
-            // supplierName
+            // DeliveryAddressList
             // 
-            supplierName.Location = new Point(116, 641);
-            supplierName.Name = "supplierName";
-            supplierName.Size = new Size(299, 23);
-            supplierName.TabIndex = 45;
+            DeliveryAddressList.DropDownStyle = ComboBoxStyle.DropDownList;
+            DeliveryAddressList.FormattingEnabled = true;
+            DeliveryAddressList.Location = new Point(18, 301);
+            DeliveryAddressList.Name = "DeliveryAddressList";
+            DeliveryAddressList.Size = new Size(199, 23);
+            DeliveryAddressList.TabIndex = 48;
+            DeliveryAddressList.SelectedIndexChanged += DeliveryAddressList_SelectedIndexChanged;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(231, 251);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(200, 23);
+            comboBox1.TabIndex = 47;
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.ImeMode = ImeMode.NoControl;
-            label7.Location = new Point(18, 644);
+            label7.Location = new Point(18, 103);
             label7.Name = "label7";
             label7.Size = new Size(50, 15);
             label7.TabIndex = 44;
             label7.Text = "Supplier";
             // 
-            // supplierAddress
+            // DatePicker
             // 
-            supplierAddress.Location = new Point(116, 670);
-            supplierAddress.Name = "supplierAddress";
-            supplierAddress.Size = new Size(299, 23);
-            supplierAddress.TabIndex = 43;
+            DatePicker.CustomFormat = "MMMMdd, yyyy";
+            DatePicker.Format = DateTimePickerFormat.Custom;
+            DatePicker.Location = new Point(18, 70);
+            DatePicker.Margin = new Padding(3, 3, 10, 10);
+            DatePicker.Name = "DatePicker";
+            DatePicker.Size = new Size(200, 23);
+            DatePicker.TabIndex = 46;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.ImeMode = ImeMode.NoControl;
+            label1.Location = new Point(18, 52);
+            label1.Name = "label1";
+            label1.Size = new Size(67, 15);
+            label1.TabIndex = 33;
+            label1.Text = "Create date";
+            // 
+            // SupplierName
+            // 
+            SupplierName.BorderStyle = BorderStyle.FixedSingle;
+            SupplierName.Location = new Point(18, 121);
+            SupplierName.Margin = new Padding(3, 3, 3, 10);
+            SupplierName.Name = "SupplierName";
+            SupplierName.Size = new Size(200, 23);
+            SupplierName.TabIndex = 45;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.ImeMode = ImeMode.NoControl;
+            label2.Location = new Point(231, 103);
+            label2.Name = "label2";
+            label2.Size = new Size(81, 15);
+            label2.TabIndex = 34;
+            label2.Text = "Quotation no.";
+            // 
+            // quotationNo
+            // 
+            quotationNo.BorderStyle = BorderStyle.FixedSingle;
+            quotationNo.Location = new Point(231, 121);
+            quotationNo.Margin = new Padding(3, 3, 3, 10);
+            quotationNo.Name = "quotationNo";
+            quotationNo.Size = new Size(200, 23);
+            quotationNo.TabIndex = 35;
+            // 
+            // SupplierAddress
+            // 
+            SupplierAddress.BorderStyle = BorderStyle.FixedSingle;
+            SupplierAddress.Location = new Point(18, 172);
+            SupplierAddress.Margin = new Padding(3, 3, 3, 10);
+            SupplierAddress.Multiline = true;
+            SupplierAddress.Name = "SupplierAddress";
+            SupplierAddress.Size = new Size(413, 50);
+            SupplierAddress.TabIndex = 43;
+            // 
+            // PaymentTerms
+            // 
+            PaymentTerms.BorderStyle = BorderStyle.FixedSingle;
+            PaymentTerms.Location = new Point(17, 250);
+            PaymentTerms.Margin = new Padding(3, 3, 3, 10);
+            PaymentTerms.Name = "PaymentTerms";
+            PaymentTerms.Size = new Size(200, 23);
+            PaymentTerms.TabIndex = 36;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.ImeMode = ImeMode.NoControl;
-            label6.Location = new Point(18, 673);
+            label6.Location = new Point(17, 154);
             label6.Name = "label6";
             label6.Size = new Size(93, 15);
             label6.TabIndex = 42;
@@ -231,17 +327,26 @@
             // 
             label4.AutoSize = true;
             label4.ImeMode = ImeMode.NoControl;
-            label4.Location = new Point(18, 818);
+            label4.Location = new Point(17, 283);
             label4.Name = "label4";
             label4.Size = new Size(92, 15);
             label4.TabIndex = 41;
             label4.Text = "Delivery address";
             // 
+            // DeliveryAddress
+            // 
+            DeliveryAddress.BorderStyle = BorderStyle.FixedSingle;
+            DeliveryAddress.Location = new Point(18, 330);
+            DeliveryAddress.Multiline = true;
+            DeliveryAddress.Name = "DeliveryAddress";
+            DeliveryAddress.Size = new Size(413, 50);
+            DeliveryAddress.TabIndex = 38;
+            // 
             // label5
             // 
             label5.AutoSize = true;
             label5.ImeMode = ImeMode.NoControl;
-            label5.Location = new Point(18, 789);
+            label5.Location = new Point(231, 232);
             label5.Name = "label5";
             label5.Size = new Size(82, 15);
             label5.TabIndex = 40;
@@ -251,79 +356,27 @@
             // 
             label3.AutoSize = true;
             label3.ImeMode = ImeMode.NoControl;
-            label3.Location = new Point(18, 760);
+            label3.Location = new Point(18, 232);
             label3.Name = "label3";
             label3.Size = new Size(87, 15);
             label3.TabIndex = 39;
             label3.Text = "Payment terms";
             // 
-            // deliveryAddress
+            // txtExtractedData
             // 
-            deliveryAddress.Location = new Point(116, 815);
-            deliveryAddress.Name = "deliveryAddress";
-            deliveryAddress.Size = new Size(299, 23);
-            deliveryAddress.TabIndex = 38;
-            // 
-            // deliveryTerms
-            // 
-            deliveryTerms.Location = new Point(116, 786);
-            deliveryTerms.Name = "deliveryTerms";
-            deliveryTerms.Size = new Size(299, 23);
-            deliveryTerms.TabIndex = 37;
-            // 
-            // paymentTerms
-            // 
-            paymentTerms.Location = new Point(116, 757);
-            paymentTerms.Name = "paymentTerms";
-            paymentTerms.Size = new Size(299, 23);
-            paymentTerms.TabIndex = 36;
-            // 
-            // quotationNo
-            // 
-            quotationNo.Location = new Point(116, 728);
-            quotationNo.Name = "quotationNo";
-            quotationNo.Size = new Size(299, 23);
-            quotationNo.TabIndex = 35;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.ImeMode = ImeMode.NoControl;
-            label2.Location = new Point(18, 731);
-            label2.Name = "label2";
-            label2.Size = new Size(81, 15);
-            label2.TabIndex = 34;
-            label2.Text = "Quotation no.";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.ImeMode = ImeMode.NoControl;
-            label1.Location = new Point(18, 702);
-            label1.Name = "label1";
-            label1.Size = new Size(67, 15);
-            label1.TabIndex = 33;
-            label1.Text = "Create date";
+            txtExtractedData.Location = new Point(531, 557);
+            txtExtractedData.Multiline = true;
+            txtExtractedData.Name = "txtExtractedData";
+            txtExtractedData.ScrollBars = ScrollBars.Vertical;
+            txtExtractedData.Size = new Size(444, 451);
+            txtExtractedData.TabIndex = 11;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1034, 1023);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(supplierName);
-            Controls.Add(label7);
-            Controls.Add(supplierAddress);
-            Controls.Add(label6);
-            Controls.Add(label4);
-            Controls.Add(label5);
-            Controls.Add(label3);
-            Controls.Add(deliveryAddress);
-            Controls.Add(deliveryTerms);
-            Controls.Add(paymentTerms);
-            Controls.Add(quotationNo);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(txtExtractedData);
             Controls.Add(grpExtractedData);
             Controls.Add(btnBrowse);
             Controls.Add(txtQuotationPath);
@@ -357,19 +410,22 @@
         private Button btnExtract;
         private GroupBox grpExtractedData;
         private TextBox txtExtractedData;
-        private DateTimePicker dateTimePicker1;
-        private TextBox supplierName;
+        private DateTimePicker DatePicker;
+        private TextBox SupplierName;
         private Label label7;
-        private TextBox supplierAddress;
+        private TextBox SupplierAddress;
         private Label label6;
         private Label label4;
         private Label label5;
         private Label label3;
-        private TextBox deliveryAddress;
-        private TextBox deliveryTerms;
-        private TextBox paymentTerms;
+        private TextBox DeliveryAddress;
+        private TextBox PaymentTerms;
         private TextBox quotationNo;
         private Label label2;
         private Label label1;
+        private ComboBox comboBox1;
+        private ComboBox DeliveryAddressList;
+        private RadioButton JpnPO;
+        private RadioButton EngPO;
     }
 }
